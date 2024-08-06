@@ -36,14 +36,14 @@ public class ControllerGUI implements ActionListener{
 
 		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-		JLabel label = new JLabel("Enter value")	;
+		JLabel label = new JLabel("Enter Room Temperature")	;
 		panel.add(label);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 		entry1 = new JTextField("",10);
 		panel.add(entry1);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Get Room Temperature");
+		JButton button = new JButton("Confirm Room Temperature");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -64,14 +64,14 @@ public class ControllerGUI implements ActionListener{
 
 		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-		JLabel label = new JLabel("Enter value")	;
+		JLabel label = new JLabel("Enter HeartBeats PM")	;
 		panel.add(label);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 		entry2 = new JTextField("",10);
 		panel.add(entry2);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Get HeartBeats PM");
+		JButton button = new JButton("Confirm HeartBeats PM");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -92,14 +92,14 @@ public class ControllerGUI implements ActionListener{
 
 		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
 
-		JLabel label = new JLabel("Enter value")	;
+		JLabel label = new JLabel("Enter Body Temperature")	;
 		panel.add(label);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 		entry3 = new JTextField("",10);
 		panel.add(entry3);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Get Body Temperature");
+		JButton button = new JButton("Confirm Body Temperature");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -161,7 +161,7 @@ public class ControllerGUI implements ActionListener{
 		JButton button = (JButton)e.getSource();
 		String label = button.getActionCommand();  
 
-		if (label.equals("Get Room Temperature")) {
+		if (label.equals("Confirm Room Temperature")) {
 			System.out.println("service 1 to be invoked ...");
 
 		
@@ -179,7 +179,7 @@ public class ControllerGUI implements ActionListener{
 
 			reply1.setText( response.getResponse() );
 		
-		}else if (label.equals("Get HeartBeats PM")) {
+		}else if (label.equals("Confirm HeartBeats PM")) {
 			System.out.println("service 2 to be invoked ...");
 
 		
@@ -197,7 +197,7 @@ public class ControllerGUI implements ActionListener{
 
 			reply2.setText( response.getResponse()  );
 			
-		}else if (label.equals("Get Body Temperature")) {
+		}else if (label.equals("Confirm Body Temperature")) {
 			System.out.println("service 3 to be invoked ...");
 
 		
