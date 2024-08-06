@@ -57,7 +57,7 @@ public class Service1 extends Service1ImplBase{
 		}
 		else 
 		{
-			responseMessage = "RoomTemperature is out of range";
+			responseMessage = "RoomTemperature is out of range,please check your air conditioner immediatly.";
 		}
 
 
