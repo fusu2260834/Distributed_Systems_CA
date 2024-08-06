@@ -63,7 +63,7 @@ Server server;
 		}
 		else 
 		{
-			responseMessage = "BodyTemperature is out of range";
+			responseMessage = "BodyTemperature is out of range, please call nurse team immediately.";
 		}
 
 
