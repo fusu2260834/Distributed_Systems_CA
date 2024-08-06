@@ -65,7 +65,7 @@ Server server;
 		}
 		else 
 		{
-			responseMessage = "HeartBeats is out of range";
+			responseMessage = "HeartBeats is out of range, please call nurse team immediately.";
 		}
 
 		//preparing the response message
