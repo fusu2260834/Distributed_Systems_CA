@@ -9,72 +9,62 @@ import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
+public class Service3 extends Service3ImplBase {
 
-public class Service3 extends Service3ImplBase{
+    public static void main(String[] args) throws InterruptedException, IOException {
+        Service3 service1 = new Service3();
 
+        int port = 50053;
+        Server server;
 
+        try {
+            server = ServerBuilder.forPort(port)
+                    .addService(service1)
+                    .build()
+                    .start();
+        } catch (IOException e) {
+            System.out.println("Service-3 failed to connect. Is the port already in use?");
+            return;
+        }
 
-	public static void main(String[] args) throws InterruptedException, IOException {
-		Service3 service1 = new Service3();
+        System.out.println("Service-3 started, listening on " + port);
 
-		int port = 50053;
+        try {
+            server.awaitTermination();
+        } catch (InterruptedException e) {
+            System.out.println("Service-3 was interrupted.");
+        }
+    }
 
-Server server;
-		
-		try
-		{
-			server = ServerBuilder.forPort(port)
-					.addService(service1)
-					.build()
-					.start();
-		}
-		catch(IOException e)
-		{
-			System.out.println("Service-3 failed to connect. Is the port already in use?");
-			return;
-		}
+    int BodyTemperature = 36;
 
-		System.out.println("Service-3 started, listening on " + port);
+    @Override
+    public void service3Do(RequestMessage request, StreamObserver<ResponseMessage> responseObserver) {
 
-		try
-		{
-			server.awaitTermination();
-		}
-		catch(InterruptedException e)
-		{
-			System.out.println("Service-3 was interrupted.");
-		}
-	}
-		//server.awaitTermination();
-	
+        String responseMessage;
 
+        try {
+            // Attempt to parse the BodyTemperature as an integer
+            int bodyTemperature = Integer.parseInt(request.getText());
 
-	int BodyTemperature = 36;
+            // Check if the body temperature is within the specified range
+            if (bodyTemperature > 35 && bodyTemperature < 38) {
+                responseMessage = "BodyTemperature is within range";
+            } else {
+                responseMessage = "BodyTemperature is out of range, please call the nurse team immediately.";
+            }
+        } catch (NumberFormatException e) {
+            // Handle invalid number format
+            responseMessage = "Invalid input: BodyTemperature must be a number.";
+        }
 
-	@Override
-	public void service3Do(RequestMessage request, StreamObserver<ResponseMessage> responseObserver) {
+        // Prepare the response message
+        ResponseMessage reply = ResponseMessage.newBuilder().setResponse(responseMessage).build();
 
-		//prepare the value to be set back
-		int BodyTemperature = Integer.parseInt(request.getText());
-		String responseMessage = null;
-		if(BodyTemperature > 35 & BodyTemperature < 38)
-		{
-			responseMessage = "BodyTemperature is within range";
-		}
-		else 
-		{
-			responseMessage = "BodyTemperature is out of range, please call nurse team immediately.";
-		}
+        // Send the response back to the client
+        responseObserver.onNext(reply);
+        responseObserver.onCompleted();
 
-
-		//preparing the response message
-		ResponseMessage reply = ResponseMessage.newBuilder().setResponse(responseMessage).build();
-
-		responseObserver.onNext( reply ); 
-
-		responseObserver.onCompleted();
-		
-		System.out.println("Sent data");
-
-	}
+        System.out.println("Sent data");
+    }
 }
